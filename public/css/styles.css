@@ -1,0 +1,39 @@
+.navbar {
+    background-color: black;
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+.navbar-brand img{
+    width: 150px;
+    height: 80px;
+}
+
+.category-selector {
+    background-color: #474747;
+    height: 36px;
+    margin-right: 3px;
+}
+
+.search-bar {
+    background-color: #3b3b3b;
+    /* Remove white borders */
+    border: 0;
+    min-width: 600px;
+    max-width: 2000px;
+}
+
+.search-bar:focus {
+    background-color: #3b3b3b;
+    color: white;
+}
+
+.search-submit-btn {
+    background-color: #3b3b3b;
+}
+.cart-image {
+    width: 40px;
+    height: 40px;
+}

@@ -18,39 +18,51 @@
 </head>
 <body>
     <section id="navigation-bar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Hamburger Menu -->
+
+            <!-- Logo -->
+            <a class="navbar-brand" href="#"><img src="images/Newegg-logo.png" alt="logo"></a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
-            </button>
-          
+            </button> -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
+              <ul class="navbar-nav ms-auto">
+                <!-- Category Selector -->
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="category-selector nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    All
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">CPU</a>
+                    <a class="dropdown-item" href="#">GPU</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
+                    </div>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
+                <!-- Search Bar -->
+                <li>
+                    <div class="input-group">
+                        <div class="form-outline">
+                          <input type="search" id="form1" class="search-bar form-control" />
+                          <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="button" class="search-submit-btn btn btn-outline-primary">
+                          <h1>Search</h1>
+                        </button>
+                    </div>
                 </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+                <li>
+                    <a href=""><img class="cart-image mr-auto" src="/images/shopping-cart-icon.jpg" alt=""></a>
+                </li>
             </div>
           </nav>
+          <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light shadow-3 p-4">
+              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
+              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
+              <button class="btn btn-link btn-block m-0">Link 3</button>
+            </div>
+          </div>
     </section>
+    
