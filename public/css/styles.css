@@ -1,3 +1,7 @@
+body {
+    background-color: #292929;
+}
+
 .navbar {
     background-color: black;
 }
@@ -34,6 +38,24 @@
     background-color: #3b3b3b;
     height: 35px;
 }
+
+.reg-div:hover {
+    border: 1px solid #555;
+    border-color: white;
+}
+
+.register-btn, .register-btn:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.subtext {
+    font-size: .8rem;
+}
 .cart-btn {
     color: white;
+}
+.cart-btn:hover {
+    border: 1px solid #555;
+    border-color: white;
 }
