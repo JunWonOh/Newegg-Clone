@@ -20,13 +20,18 @@
     <section id="navigation-bar">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <!-- Hamburger Menu -->
-
+            <div class="hamburger-menu"> 
+              <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bars fa-2x"></i>
+              </a>
+              <div class="ham-dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
             <!-- Logo -->
             <a class="navbar-brand" href="#"><img src="images/Newegg-logo.png" alt="logo"></a>
-            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button> -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto">
                 <!-- Category Selector -->
                 <li class="nav-item dropdown">
@@ -41,7 +46,7 @@
                     </div>
                 </li>
                 <!-- Search Bar -->
-                <li>
+                <li class="search-bar-li">
                     <div class="input-group">
                         <div class="form-outline">
                           <input type="search" id="form1" class="search-bar form-control" />
@@ -71,14 +76,5 @@
                     <a href=""><i class="cart-btn fas fa-shopping-cart fa-2x"></i></a>
                 </li>
               </ul>
-            </div>
           </nav>
-          <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light shadow-3 p-4">
-              <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-              <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-              <button class="btn btn-link btn-block m-0">Link 3</button>
-            </div>
-          </div>
     </section>
-    
