@@ -110,3 +110,52 @@ body {
     border: 1px solid #555;
     border-color: white;
 }
+
+#login-area {
+    top: 30%;
+    left: 35%;
+    position: absolute;
+}
+
+.main-div {
+    background-color: aliceblue;
+    width: 1000px;
+}
+
+.main-login {
+    width: 450px;
+    margin: 30px;
+}
+.main-login h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.alt-login {
+    margin-top: 52px;
+    width: 300px;
+}
+.login-btn {
+    width: 425px;
+    background-color: #ffa100;
+    color: black;
+    font-weight: bold;
+    border: 0;
+}
+.login-btn:hover {
+   background-color: #bd7700; 
+}
+.google-anchor, .google-anchor:hover {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0;
+    padding-left: 18px;
+    text-align: center;
+}
+.google-login {
+    background-color: #ff3c00;
+}
+.google-login:hover {
+    background-color: #c92f00;
+}
