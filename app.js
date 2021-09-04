@@ -12,7 +12,6 @@ const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
-
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -20,13 +19,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// Level 5
 app.use(session({
-    secret: "Our little secret.",
+    secret: process.env.CLIENT_SECRET,
     resave: false,
     saveUninitialized: false
 }));
-// Level 5 - initialize passport, then use it to set up a session
+//Initialize passport, then use it to set up a session
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,22 +44,25 @@ const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 
+//Format found in docs (Configure):
+//https://www.passportjs.org/docs/authenticate/
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
-  
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
       done(err, user);
     });
 });
 
-
+//Format found in docs:
 //https://www.passportjs.org/packages/passport-google-oauth20/
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
+    //the URL in which the GET request will be issued upon login
     callbackURL: "http://localhost:3000/auth/google/secrets",
+    //required to account for the deprecation of Google+
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -70,6 +71,7 @@ passport.use(new GoogleStrategy({
     });
   }
 ));
+//Use passport.authenticate(), specifying the 'google' strategy, to authenticate requests.
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 app.get('/auth/google/secrets', 
