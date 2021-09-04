@@ -93,6 +93,10 @@ app.get("/register", function(req, res) {
     res.render("register");
 });
 
+app.get("/cart", function(req, res) {
+    res.render("cart")
+});
+
 app.listen(port, function(){
     console.log("Server initialized on port " + port);
 });

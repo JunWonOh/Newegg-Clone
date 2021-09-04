@@ -4,6 +4,17 @@ body {
     overflow-y: scroll;
 }
 
+/* Disable Highlighting */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
 .flex-container {
     flex-direction: row;
     display: flex;
@@ -11,11 +22,10 @@ body {
 
 /* Navigation */
 #navigation-bar {
-    overflow-x: auto;
     width: 100%;
     background-color: black;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
 }
 .navbar-brand img{
     width: 150px;
@@ -111,8 +121,6 @@ body {
     border-color: white;
 }
 
-
-
 /* Login/Register */
 #login-area {
     top: 30%;
@@ -161,4 +169,19 @@ body {
 }
 .google-login:hover {
     background-color: #c92f00;
+}
+
+#first-section {
+    padding-top: 106px;
+}
+
+
+#home-carousel, .cropped {
+    height: 370px;
+    width: 1300px;
+    overflow: hidden;
+
+}
+.cropped img {
+
 }
