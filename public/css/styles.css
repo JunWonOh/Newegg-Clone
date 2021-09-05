@@ -178,10 +178,20 @@ body {
 
 #home-carousel, .cropped {
     height: 370px;
-    width: 1300px;
+    width: 100%;
     overflow: hidden;
 
 }
 .cropped img {
+    margin: -10px 0px 0px -180px;
+}
 
+#flex-container {
+    display: flex;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
