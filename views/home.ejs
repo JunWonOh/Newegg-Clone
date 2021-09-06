@@ -1,52 +1,141 @@
 <%- include("templates/header") -%> 
     <section id="first-section">
-        <div id="flex-container">
-            <div id="flex-column categories" style="width: 19%;">
-                <ul>
+        <div class="flex-container">
+            <div class="edge-border"></div>
+            <div id="item categories" style="width: 10.5%;">
+                <ul class="category-list">
+                    <!-- * Processors -->
                     <li>
-
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Processors
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">Intel</a>
+                                <a class="dropdown-item" href="#">AMD</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- * Graphics Card -->
+                    <li>
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Graphics Card
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">NVIDIA</a>
+                                <a class="dropdown-item" href="#">AMD</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- * Memory -->
+                    <li>
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Memory
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">Corsair</a>
+                                <a class="dropdown-item" href="#">G. Skill</a>
+                                <a class="dropdown-item" href="#">Crucial</a>
+                                <a class="dropdown-item" href="#">Samsung</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- * Motherboard -->
+                    <li>
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Motherboard
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">LGA 1151</a>
+                                <a class="dropdown-item" href="#">AM4 Socket</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- * Cases -->
+                    <li>
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cases
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">NZXT</a>
+                                <a class="dropdown-item" href="#">Corsair</a>
+                                <a class="dropdown-item" href="#">Thermaltake</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- * Power Supplies -->
+                    <li>
+                        <div class="category btn-group dropend">
+                            <button type="button" class="btn btn-primary-outline dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Power Supples
+                            </button>
+                            <ul class="ham-dropdown-menu dropdown-menu">
+                                <a class="dropdown-item" href="#">NZXT</a>
+                                <a class="dropdown-item" href="#">Corsair</a>
+                                <a class="dropdown-item" href="#">Thermaltake</a>
+                                <a class="dropdown-item" href="#">EVGA</a>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
-            <div id="flex-column" style="width: 72.5%;">
+            <div class="item" style="width: 72.5%;">
                 <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                    <div class="carousel-item active cropped">
-                        <img src="/images/carousel-item/carousel-item (1).jpg" alt="...">
-                    </div>
-                    <div class="carousel-item cropped">
-                        <img src="/images/carousel-item/carousel-item (2).jpg" alt="...">
-                    </div>
-                    <div class="carousel-item cropped">
-                        <img src="/images/carousel-item/carousel-item (3).jpg" alt="...">
-                    </div>
-                    <div class="carousel-item cropped">
-                        <img src="/images/carousel-item/carousel-item (4).jpg" alt="...">
-                    </div>
+                        <div class="carousel-item active cropped">
+                            <img src="/images/carousel-item/carousel-item (1).jpg" alt="...">
+                        </div>
+                        <div class="carousel-item cropped">
+                            <img src="/images/carousel-item/carousel-item (2).jpg" alt="...">
+                        </div>
+                        <div class="carousel-item cropped">
+                            <img src="/images/carousel-item/carousel-item (3).jpg" alt="...">
+                        </div>
+                        <div class="carousel-item cropped">
+                            <img src="/images/carousel-item/carousel-item (4).jpg" alt="...">
+                        </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#home-carousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#home-carousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <div id="flex-container" style="width: 100%;">
-                    <div id="flex-column" style="width: 66%;">
+                <div class="flex-container" style="width: 100%;">
+                    <div id="item" style="width: 66%;">
                         <img src="/images/homepage/homepage (2).jpg" alt="" style="width: 100%;">
                     </div>
-                    <div id="flex-column" style="width: 33%; margin-left: 14px;">
+                    <div id="item" style="width: 33%; margin-left: 14px;">
                         <img src="/images/homepage/homepage (1).jpg" alt="" style="width: 100%;">
                     </div>
                 </div>
             </div>
-            <div id="flex-column" style="width: 8.5%;">
+            <div id="edge-border">
                 
             </div>
         </div>
         
+    </section>
+    <section id="categories">
+        <div class="flex-container">
+            <div class="cat-edge-border"></div>
+            <div class="category-products flex-container">
+                <div class="circle"><img src="/images/homepage/categories/cpu.png" alt="CPU"><p>Processors</p></div>
+                <div class="circle"><img src="/images/homepage/categories/gpu.png" alt="GPU"></div>
+                <div class="circle"><img src="/images/homepage/categories/ram.png" alt="RAM"></div>
+                <div class="circle"><img src="/images/homepage/categories/motherboard.png" alt="MOBO"></div>
+                <div class="circle"><img src="/images/homepage/categories/case.png" alt="CASE"></div>
+                <div class="circle"><img src="/images/homepage/categories/psu.png" alt="PSU"></div>
+            </div>
+            <div class="cat-edge-border"></div>
+        </div>
     </section>
     
 <%- include("templates/footer") -%>
