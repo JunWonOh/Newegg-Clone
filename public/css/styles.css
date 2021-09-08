@@ -259,3 +259,10 @@ li {
 .cat-edge-border {
     width: 33%
 }
+
+.category-name {
+    color: white;
+    text-align: center;
+    background-color: #292929;
+    margin-top: -15px;
+}
