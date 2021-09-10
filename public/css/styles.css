@@ -1,5 +1,5 @@
 body {
-    background-color: #292929;
+    background-color: #242424;
     min-width: 1200px;
     overflow-y: scroll;
 }
@@ -18,12 +18,14 @@ body {
 .flex-container {
     flex-direction: row;
     display: flex;
+    width: 100%;
 }
 
 /* Navigation */
 #navigation-bar {
     width: 100%;
-    background-color: black;
+    max-height: 106px;
+    background-color: #0d0d12;
     position: fixed;
     z-index: 3;
 }
@@ -55,6 +57,7 @@ body {
     background-color: #474747;
     height: 36px;
     margin-right: 3px;
+    max-width: 58px;
 }
 .form-outline {
     width: 90%
@@ -129,12 +132,10 @@ body {
     left: 25%;
     position: absolute;
 }
-
 .main-div {
     background-color: aliceblue;
     width: 1000px;
 }
-
 .main-login {
     width: 450px;
     margin: 30px;
@@ -143,7 +144,6 @@ body {
     font-size: 1.4rem;
     font-weight: bold;
 }
-
 .alt-login {
     margin-top: 52px;
     width: 300px;
@@ -178,13 +178,13 @@ body {
 }
 
 
+/* Carousel */
 #home-carousel, .cropped {
     height: 80%;
     width: 100%;
     overflow: hidden;
 
 }
-
 .carousel-inner, .carousel-item, .carousel-item img{
     height: 100%;
 }
@@ -236,10 +236,11 @@ li {
     width: 8.5%;
 }
 
+/* Circular Category Selector */
 #categories {
     padding-top: 106px;
+    margin: 40px 0;
 }
-
 .circle {
     border-radius: 50%;
     background-color: white;
@@ -248,21 +249,28 @@ li {
     overflow: hidden;
     margin: 0 20px;
 }
-
 .circle img {
     max-height: 130px;
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
-
-.cat-edge-border {
-    width: 33%
+.align-horizontally {
+    margin: auto;
+    width: fit-content;
 }
-
 .category-name {
     color: white;
     text-align: center;
     background-color: #292929;
     margin-top: -15px;
+}
+.circle:hover ~ .category-name {
+    color: orange;
+}
+
+.trending-div {
+    background-color: #3b3b3b;
+    color: white;
+    width: 83%;
 }
