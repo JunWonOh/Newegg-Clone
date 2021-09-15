@@ -1,7 +1,7 @@
 //jshint esversion:6
 require('dotenv').config();
 //TEMPORARY, FOR TESTING
-const port = 3000;
+const port = 3001;
 
 const express = require('express');
 const bodyParser = require('body-parser');
