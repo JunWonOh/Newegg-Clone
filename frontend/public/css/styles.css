@@ -188,42 +188,49 @@ body {
 .carousel-inner, .carousel-item, .carousel-item img{
     height: 100%;
 }
+.cropped img {
+    margin: -10px 0px 0px -180px;
+}
+
+li {
+    list-style-type: none;
+}
 .carousel-item, .promo-item {
     opacity: 0.6;
 }
 .carousel-item:hover, .promo-item:hover {
     opacity: 1;
 }
-.cropped img {
-    margin: -10px 0px 0px -180px;
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-
-.category-list{
-    margin-top: 15px;
-}
-li {
-    list-style-type: none;
-}
 .category button {
     color: white;
 }
+
 .category button:hover, .dropdown-item:hover {
     color: orange;
     background-color: #555;
 }
+
 .category-list, .category-list li, .category {
     padding: 0;
     width: 100%;
 }
+
 .category .btn {
     text-align: left;
 }
+
 .dropdown-toggle::after {
     float:right;
     margin-top: 8px;
     margin-right: 10px;
 }
+
 .dropend:hover .dropdown-menu{
     display: block;
     margin-top: 0; 
@@ -235,7 +242,7 @@ li {
 }
 
 /* Circular Category Selector */
-#circular-categories {
+#categories {
     padding-top: 106px;
     margin: 40px 0;
 }
@@ -260,18 +267,12 @@ li {
 .category-name {
     color: white;
     text-align: center;
-    background-color: #242424;;
+    background-color: #292929;
     margin-top: -15px;
 }
-
-.circle:hover ~ .category-name, .category-name:hover  {
+.circle:hover ~ .category-name {
     color: orange;
 }
-.circle:hover {
-    background-color: #c2c2c2;
-}
-
-
 
 .trending-div {
     background-color: #3b3b3b;

@@ -1,13 +1,16 @@
 import React from 'react'
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/home'
 
 function App() {
   const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/home")
-  }, []);
+  // React.useEffect(() => {
+  //   fetch("/home")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
 
   return (
     <div className="App">
