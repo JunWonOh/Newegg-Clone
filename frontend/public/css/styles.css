@@ -267,7 +267,7 @@ li {
 .category-name {
     color: white;
     text-align: center;
-    background-color: #292929;
+    background-color: #242424;
     margin-top: -15px;
 }
 .circle:hover ~ .category-name {

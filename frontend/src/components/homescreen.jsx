@@ -43,10 +43,8 @@ function Home(){
                         </div>
                     </div>
                     <div class="edge-border">
-                        
                     </div>
                 </div>
-                
             </section>
             <section id="categories">
                 <div class="flex-container">
