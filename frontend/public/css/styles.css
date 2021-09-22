@@ -1,3 +1,7 @@
+.subtext, .form-group, .form-check {
+    text-align: left;
+}
+
 body {
     background-color: #242424;
     min-width: 1200px;
@@ -111,7 +115,6 @@ body {
 /* Checkout Button */
 .cart-btn {
     margin-top: 8px;
-    margin-left: 8px;
     color: white;
     width: 60px;
     height: 50px;
@@ -158,12 +161,14 @@ body {
 .login-btn:hover {
    background-color: #bd7700; 
 }
+.fa-google {
+    margin-right: 10px;
+}
 .google-anchor, .google-anchor:hover {
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
     padding: 0;
-    padding-left: 18px;
     text-align: center;
 }
 .google-login {
