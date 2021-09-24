@@ -2,8 +2,10 @@
 require('dotenv').config();
 //TEMPORARY, FOR TESTING
 const port = 3001;
-
+//array of products from products.js
+const testProducts = require('./products');
 const express = require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
@@ -19,6 +21,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(cors());
+
 app.use(session({
     secret: process.env.CLIENT_SECRET,
     resave: false,
@@ -28,7 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/neweggDB", {useNewUrlParser: true});
 
 const userSchema = new mongoose.Schema ({
     email: String, 
@@ -37,10 +41,22 @@ const userSchema = new mongoose.Schema ({
     secret: String
 });
 
+const productSchema = new mongoose.Schema({
+	  name: String,
+	  price: Number,
+	  image: String,
+	  type: String,
+	  brand: String,
+	  platform: String
+});
+
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
 const User = new mongoose.model("User", userSchema);
+const Product = mongoose.model("Product", productSchema);
+
+// Product.insertMany(testProducts);
 
 passport.use(User.createStrategy());
 
@@ -82,7 +98,17 @@ app.get('/auth/google/secrets',
 });
 
 app.get("/", function(req, res){
-    res.render("home")
+  // Product.find()
+  // .then(products => res.json(products))
+  // .catch(err => res.status(400).json('Error: ' + err));
+  // console.log(Product.find().then(products => res.json(products)));
+  Product.find({}, function(err, products) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(products);
+    }
+  })
 });
 
 app.get("/login", function(req, res) {

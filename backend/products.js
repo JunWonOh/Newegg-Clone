@@ -1,4 +1,4 @@
-const products = [
+module.exports = [
     {
         name: "MSI Gaming GeForce RTX 3060 Ti 8GB GDDR6 PCI Express 4.0 Video Card RTX 3060 Ti Gaming X 8G LHR",
         price: 919.99,
@@ -63,8 +63,6 @@ const products = [
         brand: "AMD",
         platform: "AM4"
     },
-
-
     {
         name: "ASUS ROG STRIX B550-F GAMING AM4 AMD B550 SATA 6Gb/s ATX AMD Motherboard",
         price: 179.99,
@@ -185,4 +183,5 @@ const products = [
         brand: "DeepCool",
         platform: "Micro-ATX"
     }
-]
+];
+

@@ -1,10 +1,11 @@
-import React from "react"
+import React from "react";
+import './product.css';
 
 function Product(props) {
     return (
-        <div style={{width: "20%", height: "400px"}}>
-            <ul>
-                <li><img src={props.itemImgURL} /></li>
+        <div className="product-div" style={{width: "20%", height: "400px"}}>
+            <ul className="product-ul">
+                <li><img className="product-img center" src={props.itemImgURL} /></li>
                 <li>{props.itemName}</li>
                 <li>{props.itemPrice}</li>
                 <button>Add To Cart</button>
