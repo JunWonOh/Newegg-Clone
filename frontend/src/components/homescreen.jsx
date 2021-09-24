@@ -105,8 +105,8 @@ export default class HomeScreen extends React.Component {
                     <div class="flex-container">
                         <div class="edge-border"></div>
                         <div class="trending-div">
-                            <h1>TRENDING NOW</h1>
-                            <div style={{display: "flex", flexWrap: "wrap"}}>
+                            <h1 className="category-header">TRENDING NOW</h1>
+                            <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
                                 { this.ListOfProducts() }
                             </div>
                         </div>
