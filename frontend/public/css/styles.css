@@ -88,7 +88,7 @@ body {
 .fa-user-circle {
     margin-top: 6px;
 }
-.register-btn, .register-btn:hover{
+.register-btn, .register-btn:hover, .hide-underline {
     color: white;
     text-decoration: none;
 }
@@ -279,14 +279,16 @@ li {
     color: orange;
 }
 
-.trending-div {
+.product-grid-div {
     background-color: #3b3b3b;
     color: white;
     width: 83%;
+    padding-bottom: 30px;
 }
 
 
 .category-header {
+    color: white;
     font-size: 1.5rem;
     text-align: left;
     margin-left: 30px;

@@ -20,7 +20,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
+//Cross-Origin Resource Sharing - allows communication with React
 app.use(cors());
 
 app.use(session({
@@ -34,11 +34,16 @@ app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/neweggDB", {useNewUrlParser: true});
 
+const cartSchema = new mongoose.Schema({
+    productId: String
+});
+
 const userSchema = new mongoose.Schema ({
     email: String, 
     password: String,
     googleId: String,
-    secret: String
+    secret: String,
+    products: [cartSchema]
 });
 
 const productSchema = new mongoose.Schema({
@@ -50,12 +55,15 @@ const productSchema = new mongoose.Schema({
 	  platform: String
 });
 
+//Inportant to place this before defining model for userSchema
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
+const Cart = mongoose.model("Cart", cartSchema);
 const User = new mongoose.model("User", userSchema);
 const Product = mongoose.model("Product", productSchema);
 
+// Commented out to prevent duplication of entries in database
 // Product.insertMany(testProducts);
 
 passport.use(User.createStrategy());
@@ -101,14 +109,13 @@ app.get("/", function(req, res){
   // Product.find()
   // .then(products => res.json(products))
   // .catch(err => res.status(400).json('Error: ' + err));
-  // console.log(Product.find().then(products => res.json(products)));
   Product.find({}, function(err, products) {
     if (err) {
       console.log(err);
     } else {
       res.json(products);
     }
-  })
+  }).limit(10)
 });
 
 app.get("/login", function(req, res) {
@@ -122,6 +129,17 @@ app.get("/register", function(req, res) {
 app.get("/cart", function(req, res) {
     res.render("cart")
 });
+
+app.get('/p/:id', function(req, res) {
+  const queryId = req.params.id;
+  Product.find({type: queryId}, function(err, products) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(products);
+    }
+  })
+}); 
 
 app.listen(port, function(){
     console.log("Server initialized on port " + port);
