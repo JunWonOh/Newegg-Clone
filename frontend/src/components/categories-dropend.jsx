@@ -10,8 +10,8 @@ function SideCategories() {
                             Processors
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">Intel</a>
-                            <a class="dropdown-item" href="#">AMD</a>
+                            <a class="dropdown-item" href="/p/intel">Intel</a>
+                            <a class="dropdown-item" href="/p/amd">AMD</a>
                         </ul>
                     </div>
                 </li>
@@ -21,8 +21,8 @@ function SideCategories() {
                             Graphics Card
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">NVIDIA</a>
-                            <a class="dropdown-item" href="#">AMD</a>
+                            <a class="dropdown-item" href="/p/nvidia">NVIDIA</a>
+                            <a class="dropdown-item" href="/p/amd">AMD</a>
                         </ul>
                     </div>
                 </li>
@@ -32,10 +32,10 @@ function SideCategories() {
                             Memory
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">Corsair</a>
-                            <a class="dropdown-item" href="#">G. Skill</a>
-                            <a class="dropdown-item" href="#">Crucial</a>
-                            <a class="dropdown-item" href="#">Samsung</a>
+                            <a class="dropdown-item" href="/p/corsair">Corsair</a>
+                            <a class="dropdown-item" href="/p/gskill">G. Skill</a>
+                            <a class="dropdown-item" href="/p/crucial">Crucial</a>
+                            <a class="dropdown-item" href="/p/samsung">Samsung</a>
                         </ul>
                     </div>
                 </li>
@@ -45,8 +45,8 @@ function SideCategories() {
                             Motherboard
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">LGA 1151</a>
-                            <a class="dropdown-item" href="#">AM4 Socket</a>
+                            <a class="dropdown-item" href="/p/lga1151">LGA 1151</a>
+                            <a class="dropdown-item" href="/p/am4">AM4 Socket</a>
                         </ul>
                     </div>
                 </li>
@@ -56,9 +56,9 @@ function SideCategories() {
                             Cases
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">NZXT</a>
-                            <a class="dropdown-item" href="#">Corsair</a>
-                            <a class="dropdown-item" href="#">Thermaltake</a>
+                            <a class="dropdown-item" href="/p/nzxt">NZXT</a>
+                            <a class="dropdown-item" href="/p/corsair">Corsair</a>
+                            <a class="dropdown-item" href="/p/thermaltake">Thermaltake</a>
                         </ul>
                     </div>
                 </li>
@@ -68,10 +68,10 @@ function SideCategories() {
                             Power Supplies
                         </button>
                         <ul class="ham-dropdown-menu dropdown-menu">
-                            <a class="dropdown-item" href="#">NZXT</a>
-                            <a class="dropdown-item" href="#">Corsair</a>
-                            <a class="dropdown-item" href="#">Thermaltake</a>
-                            <a class="dropdown-item" href="#">EVGA</a>
+                            <a class="dropdown-item" href="/p/nzxt">NZXT</a>
+                            <a class="dropdown-item" href="/p/corsair">Corsair</a>
+                            <a class="dropdown-item" href="/p/thermaltake">Thermaltake</a>
+                            <a class="dropdown-item" href="/p/evga">EVGA</a>
                         </ul>
                     </div>
                 </li>

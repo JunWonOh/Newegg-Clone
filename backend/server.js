@@ -131,7 +131,20 @@ app.get("/cart", function(req, res) {
 });
 
 app.get('/p/:id', function(req, res) {
-  const queryId = req.params.id;
+  var queryId = req.params.id;
+  if (queryId.trim().toLowerCase().match(/^.*(processor|cpu|i3|i5|i7|ryzen).*$/)) {
+    queryId = "CPU";
+  } else if (queryId.trim().toLowerCase().match(/^.*(graphics|card|gtx|rtx|rx|gpu).*$/)) {
+    queryId = "GPU";
+  } else if (queryId.trim().toLowerCase().match(/^.*(memory|ram|ghz|skill).*$/)) {
+    queryId = "RAM";
+  } else if (queryId.trim().toLowerCase().match(/^.*(mobo|mother|board|z390|x370|b450|b550|a320|lga).*$/)) {
+    queryId = "Motherboard";
+  } else if (queryId.trim().toLowerCase().match(/^.*(atx|case|chassis|tempered|glass|acrylic).*$/)) {
+    queryId = "Case";
+  } else if (queryId.trim().toLowerCase().match(/^.*(watt|psu|power|supply|bronze|gold).*$/)) {
+    queryId = "PSU";
+  }
   Product.find({type: queryId}, function(err, products) {
     if (err) {
       console.log(err);

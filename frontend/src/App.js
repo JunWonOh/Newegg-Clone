@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar';
 import Home from './components/homescreen';
@@ -10,8 +9,6 @@ import Query from './components/query'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [data, setData] = React.useState(null);
-
   // React.useEffect(() => {
   //   fetch("/home")
   //     .then((res) => res.json())

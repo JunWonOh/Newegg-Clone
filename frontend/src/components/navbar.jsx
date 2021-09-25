@@ -1,6 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
+
+function CheckSubmit(e, query) {
+    if (e.key === "Enter") {
+        window.location.href = "/p/" + query;
+    }
+}
 
 function Navbar(){
+    const [query, setQuery] = useState('');
+    
     return (
         <div>
             <section id="navigation-bar">
@@ -10,9 +18,9 @@ function Navbar(){
                         <i class="fas fa-bars fa-2x"></i>
                     </a>
                     <div className="ham-dropdown-menu dropdown-menu noselect" aria-labelledby="navbarDropdownMenuLink">
-                        <a className="dropdown-item" href="#">Action</a>
-                        <a className="dropdown-item" href="#">Another action</a>
-                        <a className="dropdown-item" href="#">Something else here</a>
+                        <a className="dropdown-item" href="/">Action</a>
+                        <a className="dropdown-item" href="/">Another action</a>
+                        <a className="dropdown-item" href="/">Something else here</a>
                     </div>
                     </div>
                     <a className="navbar-brand" href="/"><img src="/images/Newegg-clone-logo.png" alt="logo"></img></a>
@@ -22,8 +30,8 @@ function Navbar(){
                             All
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">CPU</a>
-                                <a className="dropdown-item" href="#">GPU</a>
+                                <a className="dropdown-item" href="/p/cpu">CPU</a>
+                                <a className="dropdown-item" href="/p/gpu">GPU</a>
                                 <div className="dropdown-divider"></div>
                                 <a className="dropdown-item" href="www.google.com">Something else here</a>
                             </div>
@@ -31,11 +39,13 @@ function Navbar(){
                         <li className="search-bar-li">
                             <div className="input-group">
                                 <div className="form-outline">
-                                <input type="search" id="form1" className="search-bar form-control" />
+                                <input type="search" id="form1" className="search-bar form-control" onChange={(e) => setQuery(e.target.value)} onKeyPress={ (e) => CheckSubmit(e, query) }/>
                                 </div>
-                                <button type="button" className="search-submit-btn btn btn-outline-light">
-                                <i className="search-hourglass fas fa-search"></i>
-                                </button>
+                                <a href={"/p/" + query}>
+                                    <button type="button" className="search-submit-btn btn btn-outline-light">
+                                    <i className="search-hourglass fas fa-search"></i>
+                                    </button>
+                                </a>
                             </div>
                         </li>
                         <li className="register">

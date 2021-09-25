@@ -3,7 +3,7 @@ import SideCategories from "./categories-dropend";
 import axios from 'axios';
 import Product from './product'
 
-export default class HomeScreen extends React.Component {
+export default class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {products: []};
@@ -62,9 +62,11 @@ export default class HomeScreen extends React.Component {
                                 <div className="promo-item" style={{width: "66%"}}>
                                     <img src="/images/homepage/homepage (2).jpg" alt="" style={{width: "100%"}} />
                                 </div>
-                                <div className="promo-item" style={{width: "33%", marginLeft: "14px"}}>
-                                    <img src="/images/homepage/homepage (1).jpg" alt="" style={{width: "100%"}} />
-                                </div>
+                                <a  href="https://www.dxracer.com/" style={{width: "33%", marginLeft: "14px"}}>
+                                    <div className="promo-item">
+                                        <img src="/images/homepage/homepage (1).jpg" alt="" style={{width: "100%"}} />
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         <div class="edge-border">
