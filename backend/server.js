@@ -136,7 +136,7 @@ app.get('/p/:id', function(req, res) {
     queryId = "CPU";
   } else if (queryId.trim().toLowerCase().match(/^.*(graphics|card|gtx|rtx|rx|gpu).*$/)) {
     queryId = "GPU";
-  } else if (queryId.trim().toLowerCase().match(/^.*(memory|ram|ghz|skill).*$/)) {
+  } else if (queryId.trim().toLowerCase().match(/^.*(memory|ram|ghz).*$/)) {
     queryId = "RAM";
   } else if (queryId.trim().toLowerCase().match(/^.*(mobo|mother|board|z390|x370|b450|b550|a320|lga).*$/)) {
     queryId = "Motherboard";
@@ -144,8 +144,14 @@ app.get('/p/:id', function(req, res) {
     queryId = "Case";
   } else if (queryId.trim().toLowerCase().match(/^.*(watt|psu|power|supply|bronze|gold).*$/)) {
     queryId = "PSU";
+  } else if (queryId.trim().toLowerCase().match(/^.*(msi|nvidia|evga|gigabyte|asus|am4|amd|nzxt|650w|850w).*$/)) {
+    queryId = queryId.trim().toUpperCase();
+  } else if (queryId.trim().toLowerCase().match(/^.*(skill).*$/)) {
+    queryId = "G.Skill";
+  } else if (queryId.trim().toLowerCase().match(/^.*(corsair|montech|intel).*$/)) {
+    queryId = queryId.charAt(0).toUpperCase() + queryId.slice(1).toLowerCase();
   }
-  Product.find({type: queryId}, function(err, products) {
+  Product.find({$or: [{type: queryId}, {brand: queryId}, {platform: queryId}]}, function(err, products) {
     if (err) {
       console.log(err);
     } else {
