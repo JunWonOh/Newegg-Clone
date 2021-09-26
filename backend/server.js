@@ -85,7 +85,7 @@ passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     //the URL in which the GET request will be issued upon login
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: "http://localhost:3001/auth/google/callback",
     //required to account for the deprecation of Google+
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
   },
@@ -95,14 +95,16 @@ passport.use(new GoogleStrategy({
     });
   }
 ));
-//Use passport.authenticate(), specifying the 'google' strategy, to authenticate requests.
+
+//Sign in with google - after, we want the user's profile id 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
+
 app.get('/auth/google/secrets', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('http://localhost:3000/');
 });
 
 app.get("/", function(req, res){
@@ -116,6 +118,10 @@ app.get("/", function(req, res){
       res.json(products);
     }
   }).limit(10)
+});
+
+app.post("/", function(req, res) {
+    console.log(res[0]);
 });
 
 app.get("/login", function(req, res) {
