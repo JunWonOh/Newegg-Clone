@@ -17,14 +17,15 @@ const findOrCreate = require('mongoose-findorcreate');
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({
+app.use(express.json());
+app.use(express.urlencoded({
     extended: true
 }));
 //Cross-Origin Resource Sharing - allows communication with React
 app.use(cors());
 
 app.use(session({
-    secret: process.env.CLIENT_SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }));
@@ -39,20 +40,21 @@ const cartSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema ({
-    email: String, 
+    email: {type: String, required: true, unique: true}, 
     password: String,
-    googleId: String,
+    googleId: {type: String, required: true},
     secret: String,
-    products: [cartSchema]
+    products: [cartSchema],
+    username: String
 });
 
 const productSchema = new mongoose.Schema({
-	  name: String,
-	  price: Number,
-	  image: String,
-	  type: String,
-	  brand: String,
-	  platform: String
+	  name: {type: String, required: true},
+	  price: {type: Number, required: true},
+	  image: {type: String, required: true},
+	  type: {type: String, required: true},
+	  brand: {type: String, required: true},
+	  platform: {type: String, required: true}
 });
 
 //Inportant to place this before defining model for userSchema
@@ -121,7 +123,43 @@ app.get("/", function(req, res){
 });
 
 app.post("/", function(req, res) {
-    console.log(res[0]);
+  console.log(req.body.caller);
+  if (req.body.caller === "login") {
+      const user = new User({
+        username: req.body.userInfo.username,
+        password: req.body.userInfo.password
+      });
+      console.log(user);
+      req.login(user, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("https://locahost:3000/");
+            });
+        }
+      });
+  } else if (req.body.caller === "register") {
+      const fullName = req.body.userInfo.firstname + " " + req.body.userInfo.lastname;
+      const user = new User({
+        email: req.body.userInfo.username,
+        googleId: fullName,
+        username: req.body.userInfo.username
+      });
+      console.log(user);
+      User.register(user, req.body.userInfo.password, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect("http://localhost:3000/register");
+        } else {
+            console.log('hello');
+            passport.authenticate("local")(req, res, function(){
+                // res.redirect("https://locahost:3000/");
+                res.json({username: fullName});
+            });
+        }
+      });
+  }
 });
 
 app.get("/login", function(req, res) {
