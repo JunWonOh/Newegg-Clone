@@ -57,15 +57,12 @@ export default class Register extends React.Component {
         })
             .then(response => {
                 if (response.data) {
-                    console.log('gfasdfsadf');
-                    // this.setState({
-                    //     redirectTo: '/'
-                    // })
-                    window.location.href = '/'
+                    window.location.href = '/';
                 } else {
                     console.log("Register error: incorrect info");
                 }
             })
+            .catch(e => console.log(e));
     }
 
     render() {

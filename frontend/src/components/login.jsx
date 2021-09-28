@@ -40,6 +40,7 @@ export default class Login extends React.Component {
         })
             .then(response => {
                 if (response.data) {
+                    console.log('success!!!!!!')
                     window.location.href = '/'
                 } else {
                     console.log("Login error: incorrect info");

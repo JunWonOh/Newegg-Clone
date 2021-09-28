@@ -34,18 +34,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/neweggDB", {useNewUrlParser: true});
+// mongoose.set("useCreateIndex", true);
 
 const cartSchema = new mongoose.Schema({
     productId: String
 });
 
 const userSchema = new mongoose.Schema ({
-    email: {type: String, required: true, unique: true}, 
+    // email: {type: String, required: true, unique: true}, 
+    // password: String,
+    // googleId: {type: String, required: true},
+    // secret: String,
+    // products: [cartSchema],
+    // username: String
+
     password: String,
-    googleId: {type: String, required: true},
-    secret: String,
-    products: [cartSchema],
-    username: String
+    googleId: String,
+    secret: String
 });
 
 const productSchema = new mongoose.Schema({
@@ -57,7 +62,7 @@ const productSchema = new mongoose.Schema({
 	  platform: {type: String, required: true}
 });
 
-//Inportant to place this before defining model for userSchema
+//Important to place this after defining model for userSchema
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
@@ -122,7 +127,7 @@ app.get("/", function(req, res){
   }).limit(10)
 });
 
-app.post("/", function(req, res) {
+app.post("/", function(req, res, next) {
   console.log(req.body.caller);
   if (req.body.caller === "login") {
       const user = new User({
@@ -141,22 +146,34 @@ app.post("/", function(req, res) {
       });
   } else if (req.body.caller === "register") {
       const fullName = req.body.userInfo.firstname + " " + req.body.userInfo.lastname;
-      const user = new User({
-        email: req.body.userInfo.username,
-        googleId: fullName,
-        username: req.body.userInfo.username
-      });
-      console.log(user);
-      User.register(user, req.body.userInfo.password, function(err, user) {
+      // const user = new User({
+      //   email: req.body.userInfo.username,
+      //   googleId: fullName,
+      //   username: req.body.userInfo.username
+      // });
+      // console.log(user);
+      User.register({username: req.body.userInfo.username}, req.body.userInfo.password, function(err, user) {
         if (err) {
             console.log(err);
-            res.redirect("http://localhost:3000/register");
         } else {
-            console.log('hello');
-            passport.authenticate("local")(req, res, function(){
-                // res.redirect("https://locahost:3000/");
-                res.json({username: fullName});
-            });
+            // passport.authenticate("local")(req, res, next, function(){
+            //     // res.redirect("https://locahost:3000/");
+            //     console.log('hello');
+            //     res.json({username: fullName});
+            // });
+            // console.log('hi');
+            passport.authenticate("local", (err, user, info) => {
+              if (err) throw err;
+              if (!user) res.send("No User Exists");
+              else {
+                req.logIn(user, (err) => {
+                  if (err) throw err;
+                  res.send("Successfully Authenticated");
+                  console.log(req.user);
+                });
+              }
+            })(req, res, next);
+
         }
       });
   }
