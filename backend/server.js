@@ -6,12 +6,14 @@ const port = 3001;
 const testProducts = require('./products');
 const express = require('express');
 const cors = require('cors')
-const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
+const cookieParser = require('cookie-parser');
+const bcrypt = require("bcryptjs");
+const localStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const app = express();
@@ -22,13 +24,17 @@ app.use(express.urlencoded({
     extended: true
 }));
 //Cross-Origin Resource Sharing - allows communication with React
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 app.use(session({
     secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
+app.use(cookieParser(process.env.SECRET));
 //Initialize passport, then use it to set up a session
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,16 +47,8 @@ const cartSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema ({
-    // email: {type: String, required: true, unique: true}, 
-    // password: String,
-    // googleId: {type: String, required: true},
-    // secret: String,
-    // products: [cartSchema],
-    // username: String
-
-    password: String,
-    googleId: String,
-    secret: String
+    username: String,
+    password: String
 });
 
 const productSchema = new mongoose.Schema({
@@ -67,57 +65,45 @@ userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
 const Cart = mongoose.model("Cart", cartSchema);
-const User = new mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 const Product = mongoose.model("Product", productSchema);
 
 // Commented out to prevent duplication of entries in database
 // Product.insertMany(testProducts);
 
-passport.use(User.createStrategy());
+passport.use(new localStrategy((username, password, done) => {
+  User.findOne({username: username}, (err, user) => {
+    if (err) throw err;
+    if (!user) return done(null, false);
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) throw err;
+      if (result === true) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    });
+  });
+}));
 
 //Format found in docs (Configure):
 //https://www.passportjs.org/docs/authenticate/
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
+//encrypts sensitive info using salting/hashing
+passport.serializeUser((user, cb) => {
+  cb(null, user.id);
 });
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
-});
-
-//Format found in docs:
-//https://www.passportjs.org/packages/passport-google-oauth20/
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    //the URL in which the GET request will be issued upon login
-    callbackURL: "http://localhost:3001/auth/google/callback",
-    //required to account for the deprecation of Google+
-    userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
-
-//Sign in with google - after, we want the user's profile id 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
-
-app.get('/auth/google/secrets', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/');
-});
+//decrypts sensitive info
+passport.deserializeUser((id, cb) => {
+  User.findOne({_id: id}, (err, user) => {
+    const userInformation = {
+      username: user.username
+    };
+    cb(err, userInformation);
+  });
+})
 
 app.get("/", function(req, res){
-  // Product.find()
-  // .then(products => res.json(products))
-  // .catch(err => res.status(400).json('Error: ' + err));
+  //return the first 10 objects found in Product database
   Product.find({}, function(err, products) {
     if (err) {
       console.log(err);
@@ -128,68 +114,44 @@ app.get("/", function(req, res){
 });
 
 app.post("/", function(req, res, next) {
-  console.log(req.body.caller);
   if (req.body.caller === "login") {
-      const user = new User({
-        username: req.body.userInfo.username,
-        password: req.body.userInfo.password
-      });
-      console.log(user);
-      req.login(user, function(err) {
-        if (err) {
-            console.log(err);
-        } else {
-            passport.authenticate("local")(req, res, function() {
-                res.redirect("https://locahost:3000/");
-            });
-        }
-      });
+    passport.authenticate("local", (err, user, info) => {
+      if (err) throw err;
+      if (!user) res.send("No User Exists");
+      else {
+        req.logIn(user, (err) => {
+          if (err) throw err;
+          res.json(user);
+          // console.log(req.user);
+        });
+      }
+    })(req, res, next);
   } else if (req.body.caller === "register") {
-      const fullName = req.body.userInfo.firstname + " " + req.body.userInfo.lastname;
-      // const user = new User({
-      //   email: req.body.userInfo.username,
-      //   googleId: fullName,
-      //   username: req.body.userInfo.username
-      // });
-      // console.log(user);
-      User.register({username: req.body.userInfo.username}, req.body.userInfo.password, function(err, user) {
-        if (err) {
-            console.log(err);
-        } else {
-            // passport.authenticate("local")(req, res, next, function(){
-            //     // res.redirect("https://locahost:3000/");
-            //     console.log('hello');
-            //     res.json({username: fullName});
-            // });
-            // console.log('hi');
-            passport.authenticate("local", (err, user, info) => {
-              if (err) throw err;
-              if (!user) res.send("No User Exists");
-              else {
-                req.logIn(user, (err) => {
-                  if (err) throw err;
-                  res.send("Successfully Authenticated");
-                  console.log(req.user);
-                });
-              }
-            })(req, res, next);
-
-        }
-      });
+    User.findOne({ username: req.body.userInfo.username }, async (err, doc) => {
+      if (err) throw err;
+      if (doc) res.send("User Already Exists");
+      if (!doc) {
+        const hashedPassword = await bcrypt.hash(req.body.userInfo.password, 10);
+        const newUser = new User({
+          username: req.body.userInfo.username,
+          password: hashedPassword,
+        });
+        await newUser.save();
+        res.send("User Created");
+      }
+    });
   }
 });
 
-app.get("/login", function(req, res) {
-    res.render("login");
-});
-
-app.get("/register", function(req, res) {
-    res.render("register");
-});
-
-app.get("/cart", function(req, res) {
-    res.render("cart")
-});
+app.get('/userInfo', function(req, res) {
+  if (req.isAuthenticated()){
+    User.find({username: req.user.username}, function(err, currentUser) {
+      res.json(currentUser);
+    })
+  } else {
+    res.send("ERROR: passport.js found no users logged in")
+  }
+})
 
 app.get('/p/:id', function(req, res) {
   var queryId = req.params.id;

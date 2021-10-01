@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css';
 import Navbar from './components/navbar';
 import Home from './components/homescreen';
@@ -20,7 +20,7 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route exact path="/" exact component={() => <Home />} />
+          <Route exact path="/" component={() => <Home />} />
           <Route path="/login" exact component={() => <Login />} />
           <Route path="/register" exact component={() => <Register />} />
           <Route path="/cart" exact component={() => <Cart />} />

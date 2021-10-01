@@ -6,10 +6,11 @@ export default class Login extends React.Component {
         super(props);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-
+        
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            currentUserID: ''
         }
     }
 
@@ -27,62 +28,77 @@ export default class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
-        const userInfo = {
-            username: this.state.username,
-            password: this.state.password
-        }
-        console.log(userInfo);
-
         axios.post('/', {
             caller: 'login',
-            userInfo
+            username: this.state.username,
+            password: this.state.password,
+            withCredentials: true
         })
             .then(response => {
                 if (response.data) {
-                    console.log('success!!!!!!')
+                    this.setState({
+                        currentUserID: response.data._id
+                    })
+                    var id = this.state.currentUserID;
+                    //update the value of id inside parent using React useState hook
+                    this.props.setNewId(id);
+                    //redirect to home
                     window.location.href = '/'
                 } else {
                     console.log("Login error: incorrect info");
                 }
+                console.log(response.data);
             })
+            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
-
+    
+    GetSomething(currentUserID) {
+        if (currentUserID === undefined) {
+            return (
+                <h1 style={{color: "red", fontSize: "1rem", marginTop: "30px"}}>ERROR: Couldn't find username/password in database</h1>
+            )
+        } else {
+            return (
+                <h1 style={{color: "white"}}>{currentUserID}</h1>
+            );
+        }
+    }
     render() {
         return (
             <div>
                 <section id="login-area">
-                        <div class="main-div row">
-                            <div class="main-login col-sm-4">
+                        <div className="main-div row">
+                            <div className="main-login col-sm-4">
                                 <h1>SIGN IN</h1>
                                 <form action="/login" method="POST">
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <label>Email address</label>
-                                        <input type="email" value={this.state.username} onChange={this.onChangeUsername} class="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>
-                                        <small id="emailHelp" name="password" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="email" value={this.state.username} onChange={this.onChangeUsername} className="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                        <small id="emailHelp" name="password" className="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" value={this.state.password} onChange={this.onChangePassword} class="form-control" placeholder="Password"/>
+                                    <div className="form-group">
+                                        <label htmlFor="exampleInputPassword1">Password</label>
+                                        <input type="password" value={this.state.password} onChange={this.onChangePassword} className="form-control" placeholder="Password"/>
                                     </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                                    <div className="form-check">
+                                        <input type="checkbox" className="form-check-input"/>
+                                        <label className="form-check-label">Remember me</label>
                                     </div>
-                                    <button type="submit" class="login-btn btn btn-primary" onClick={ (e) => this.handleSubmit(e) }>SIGN IN</button><p>New to Newegg Clone? <a href="/register">Sign up</a></p>
+                                    <button type="submit" className="login-btn btn btn-primary" onClick={ (e) => this.handleSubmit(e) }>SIGN IN</button><p>New to Newegg Clone? <a href="/register">Sign up</a></p>
                                 </form>
                             </div>
-                            <div class="alt-login col-sm-4">
-                                <div class="google-login card">
-                                    <div class="card-body">
-                                        <a class="google-anchor btn btn-block" href="http://localhost:3001/auth/google" role="button">
-                                            <i class="fab fa-google"></i>
+                            <div className="alt-login col-sm-4">
+                                <div className="google-login card">
+                                    <div className="card-body">
+                                        <a className="google-anchor btn btn-block" href="http://localhost:3001/auth/google" role="button">
+                                            <i className="fab fa-google"></i>
                                             Sign In with Google
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {this.GetSomething(this.state.currentUserID)}
                 </section>
             </div>
         );

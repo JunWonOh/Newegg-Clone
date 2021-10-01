@@ -62,50 +62,50 @@ export default class Register extends React.Component {
                     console.log("Register error: incorrect info");
                 }
             })
-            .catch(e => console.log(e));
+            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
 
     render() {
         return (
             <div>
                 <section id="login-area">
-                    <div class="main-div row">
-                        <div class="main-login col-sm-4">
+                    <div className="main-div row">
+                        <div className="main-login col-sm-4">
                             <h1>REGISTER</h1>
                             <form action="/register" method="POST">
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label>First Name</label>
-                                    <input type="text" value={this.state.firstname} onChange={this.onChangeFirstname} class="form-control" aria-describedby="emailHelp" placeholder="First Name" />
+                                    <input type="text" value={this.state.firstname} onChange={this.onChangeFirstname} className="form-control" aria-describedby="emailHelp" placeholder="First Name" />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label>Last Name</label>
-                                    <input type="text" value={this.state.lastname} onChange={this.onChangeLastname} class="form-control" aria-describedby="emailHelp" placeholder="Last Name" />
+                                    <input type="text" value={this.state.lastname} onChange={this.onChangeLastname} className="form-control" aria-describedby="emailHelp" placeholder="Last Name" />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label>Email address</label>
-                                    <input type="email" value={this.state.username} onChange={this.onChangeUsername} class="form-control"aria-describedby="emailHelp" placeholder="Enter email" />
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <input type="email" value={this.state.username} onChange={this.onChangeUsername} className="form-control"aria-describedby="emailHelp" placeholder="Enter email" />
+                                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label>Password</label>
-                                    <input type="password" value={this.state.password} onChange={this.onChangePassword} class="form-control" placeholder="Password" />
+                                    <input type="password" value={this.state.password} onChange={this.onChangePassword} className="form-control" placeholder="Password" />
                                 </div>
-                                <div class="form-group">
+                                <div className="form-group">
                                     <label>Confirm Password</label>
-                                    <input type="password" class="form-control" placeholder="Password" />
+                                    <input type="password" className="form-control" placeholder="Password" />
                                 </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input"/>
-                                    <label class="form-check-label">Remember me</label>
+                                <div className="form-check">
+                                    <input type="checkbox" className="form-check-input"/>
+                                    <label className="form-check-label">Remember me</label>
                                 </div>
-                                <button type="submit" class="login-btn btn btn-primary" onClick={ (e) => this.handleSubmit(e) }>REGISTER</button>
+                                <button type="submit" className="login-btn btn btn-primary" onClick={ (e) => this.handleSubmit(e) }>REGISTER</button>
                             </form>
                         </div>
-                        <div class="alt-login col-sm-4">
-                            <div class="google-login card">
-                                <div class="card-body">
-                                    <a class="google-anchor btn btn-block" href="http://localhost:3001/auth/google" role="button">
-                                        <i class="fab fa-google"></i>
+                        <div className="alt-login col-sm-4">
+                            <div className="google-login card">
+                                <div className="card-body">
+                                    <a className="google-anchor btn btn-block" href="http://localhost:3001/auth/google" role="button">
+                                        <i className="fab fa-google"></i>
                                         Register with Google
                                     </a>
                                 </div>

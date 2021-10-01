@@ -38,7 +38,7 @@ export default class HomeScreen extends Component {
                         <div className="edge-border"></div>
                         <SideCategories />
                         <div className="item" style={{width: "72.5%"}}>
-                            <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
+                            <div id="home-carousel" className="carousel slide" data-bs-ride="carousel">
                                 <div className="carousel-inner">
                                     <div className="carousel-item active cropped">
                                         <img src="/images/carousel-item/carousel-item (1).jpg" alt="..." />
@@ -73,7 +73,7 @@ export default class HomeScreen extends Component {
                                 </a>
                             </div>
                         </div>
-                        <div class="edge-border">
+                        <div className="edge-border">
                         </div>
                     </div>
                 </section>
