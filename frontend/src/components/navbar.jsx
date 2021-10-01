@@ -62,7 +62,7 @@ export default class Navbar extends React.Component {
         } else {
             return (
                 <li>
-                    <btn style={{marginLeft: "10px"}} className="logout-btn btn btn-primary" onClick={this.logout}>Log Out</btn>
+                    <button style={{marginLeft: "10px"}} className="logout-btn btn btn-primary" onClick={this.logout}>Log Out</button>
                 </li>
             )
         }

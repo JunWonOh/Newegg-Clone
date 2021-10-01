@@ -144,7 +144,7 @@ app.post("/", function(req, res, next) {
 });
 
 app.get('/userInfo', function(req, res) {
-  if (req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     User.find({username: req.user.username}, function(err, currentUser) {
       res.json(currentUser);
     })
@@ -157,6 +157,21 @@ app.get("/logout", function(req, res) {
   req.logout();
   res.send("Logged out");
 })
+
+app.post("/cart/:task", function(req, res) {
+  if (req.isAuthenticated()) {
+    if (req.params.task === "insert") {
+      const cartItem = new Cart({
+        productId: req.body.productId
+      });
+    }
+    else if (req.params.task === "remove") {
+      //remove cart item code here
+    }
+  } else {
+    res.send("not authorized");
+  }
+}) 
 
 app.get('/p/:id', function(req, res) {
   var queryId = req.params.id;

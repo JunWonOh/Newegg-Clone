@@ -301,6 +301,7 @@ li {
     font-weight: bold;
     border: 0;
     margin-left: 20px;
+    margin-top: 5px;
     display: flex;
 }
 

@@ -36,12 +36,21 @@ export default class Login extends React.Component {
         })
             .then(response => {
                 if (response.data) {
-                    this.setState({
-                        welcome: 'Welcome. Logging in...'
-                    })
-                    //redirect to home
-                    window.location.href = '/'
+                    if (response.data === "No User Exists") {
+                        this.setState({
+                            welcome: 'ERROR: ' + response.data
+                        })
+                    } else {
+                        this.setState({
+                            welcome: 'Welcome. Logging in...'
+                        })
+                        //redirect to home
+                        window.location.href = '/'
+                    }
                 } else {
+                    this.setState({
+                        welcome: 'ERROR: Could not find username/password in database'
+                    })
                     console.log("Login error: incorrect info");
                 }
                 console.log(response.data);
@@ -50,13 +59,13 @@ export default class Login extends React.Component {
     }
     
     GetStatus(currentUserID) {
-        if (currentUserID === undefined) {
+        if (currentUserID === undefined || currentUserID === "ERROR: No User Exists" || currentUserID === 'ERROR: Could not find username/password in database') {
             return (
-                <p style={{color: "red", fontSize: "1rem", marginTop: "30px"}}>ERROR: Couldn't find username/password in database</p>
+                <p style={{color: "red", fontSize: "1rem", marginTop: "30px"}}>{currentUserID}</p>
             )
         } else {
             return (
-                <p style={{color: "green"}}>{currentUserID}</p>
+                <p style={{color: "green", fontSize: "1rem", marginTop: "30px"}}>{currentUserID}</p>
             );
         }
     }
@@ -95,7 +104,7 @@ export default class Login extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        { this.GetStatus(this.state.currentUserID) }
+                        { this.GetStatus(this.state.welcome) }
                 </section>
             </div>
         );
