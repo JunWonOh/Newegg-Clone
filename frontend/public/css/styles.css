@@ -294,3 +294,16 @@ li {
     margin-left: 30px;
     padding-top: 10px;
 }
+
+.logout-btn {
+    background-color: #ffa100;
+    color: black;
+    font-weight: bold;
+    border: 0;
+    margin-left: 20px;
+    display: flex;
+}
+
+.logout-btn:hover {
+    background-color: #bd7700; 
+ }

@@ -14,7 +14,7 @@ export default class Navbar extends React.Component {
 
         this.state = {
             query: '',
-            userId: 'Sign in/Register'
+            userId: ''
         }
     }
 
@@ -40,14 +40,31 @@ export default class Navbar extends React.Component {
     }
 
     formatUsername(username) {
-        if (username === "Sign in/Register") {
-            return username;
+        if (username === undefined) {
+            return 'Sign in/Register';
         } else {
-            if (username.length > 15) {
-                return username.slice(0, 10) + '...';
-            }  else {
-                return username;
-            }
+            return (username.length > 15) ? username.slice(0, 10) + '...' : username;
+        }
+    }
+
+    logout() {
+        axios.get('logout')
+            .then(response => {
+                window.location.href = '/'
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    getLogoutBtn(username) {
+        if (username === undefined) {
+        } else {
+            return (
+                <li>
+                    <btn style={{marginLeft: "10px"}} className="logout-btn btn btn-primary" onClick={this.logout}>Log Out</btn>
+                </li>
+            )
         }
     }
 
@@ -82,7 +99,7 @@ export default class Navbar extends React.Component {
                         <li className="search-bar-li">
                             <div className="input-group">
                                 <div className="form-outline">
-                                <input type="search" id="form1" className="search-bar form-control" value={this.state.query} onChange={this.onChangeQuery} onKeyPress={ (e) => CheckSubmit(e, this.state.query) }/>
+                                <input type="search" id="form1" className="search-bar form-control" value={ this.state.query } onChange={ this.onChangeQuery } onKeyPress={ (e) => CheckSubmit(e, this.state.query) }/>
                                 </div>
                                 <a href={"/p/" + this.statequery}>
                                     <button type="button" className="search-submit-btn btn btn-outline-light">
@@ -98,7 +115,7 @@ export default class Navbar extends React.Component {
                                 <div className="item"><i className="fas fa-user-circle fa-2x"></i></div>
                                 <div className="item register-welcome">
                                 <div className="subtext">Welcome</div>
-                                <div>{ this.formatUsername(this.state.userId)}</div>
+                                <div>{ this.formatUsername(this.state.userId) }</div>
                                 </div>
                             </div>
                             </a>
@@ -107,6 +124,7 @@ export default class Navbar extends React.Component {
                         <li className="checkout">
                             <a href="/cart"><i className="cart-btn fas fa-shopping-cart fa-2x"></i></a>
                         </li>
+                        { this.getLogoutBtn(this.state.userId) }
                     </ul>
                 </nav>
             </section>

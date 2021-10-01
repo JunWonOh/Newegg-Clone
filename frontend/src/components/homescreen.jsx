@@ -17,7 +17,6 @@ export default class HomeScreen extends Component {
             .catch((error) => {
                 console.log(error);
             })
-        // console.log(this.state.products);
     }
 
     ListOfProducts() {

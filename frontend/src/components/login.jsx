@@ -10,7 +10,7 @@ export default class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            currentUserID: ''
+            welcome: ''
         }
     }
 
@@ -37,11 +37,8 @@ export default class Login extends React.Component {
             .then(response => {
                 if (response.data) {
                     this.setState({
-                        currentUserID: response.data._id
+                        welcome: 'Welcome. Logging in...'
                     })
-                    var id = this.state.currentUserID;
-                    //update the value of id inside parent using React useState hook
-                    this.props.setNewId(id);
                     //redirect to home
                     window.location.href = '/'
                 } else {
@@ -52,14 +49,14 @@ export default class Login extends React.Component {
             .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     
-    GetSomething(currentUserID) {
+    GetStatus(currentUserID) {
         if (currentUserID === undefined) {
             return (
-                <h1 style={{color: "red", fontSize: "1rem", marginTop: "30px"}}>ERROR: Couldn't find username/password in database</h1>
+                <p style={{color: "red", fontSize: "1rem", marginTop: "30px"}}>ERROR: Couldn't find username/password in database</p>
             )
         } else {
             return (
-                <h1 style={{color: "white"}}>{currentUserID}</h1>
+                <p style={{color: "green"}}>{currentUserID}</p>
             );
         }
     }
@@ -73,12 +70,12 @@ export default class Login extends React.Component {
                                 <form action="/login" method="POST">
                                     <div className="form-group">
                                         <label>Email address</label>
-                                        <input type="email" value={this.state.username} onChange={this.onChangeUsername} className="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                        <input type="email" value={ this.state.username } onChange={ this.onChangeUsername } className="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>
                                         <small id="emailHelp" name="password" className="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="exampleInputPassword1">Password</label>
-                                        <input type="password" value={this.state.password} onChange={this.onChangePassword} className="form-control" placeholder="Password"/>
+                                        <input type="password" value={ this.state.password } onChange={ this.onChangePassword } className="form-control" placeholder="Password"/>
                                     </div>
                                     <div className="form-check">
                                         <input type="checkbox" className="form-check-input"/>
@@ -98,7 +95,7 @@ export default class Login extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        {this.GetSomething(this.state.currentUserID)}
+                        { this.GetStatus(this.state.currentUserID) }
                 </section>
             </div>
         );

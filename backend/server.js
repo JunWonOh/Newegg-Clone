@@ -153,6 +153,11 @@ app.get('/userInfo', function(req, res) {
   }
 })
 
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.send("Logged out");
+})
+
 app.get('/p/:id', function(req, res) {
   var queryId = req.params.id;
   if (queryId.trim().toLowerCase().match(/^.*(processor|cpu|i3|i5|i7|ryzen).*$/)) {
