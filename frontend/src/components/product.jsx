@@ -4,17 +4,11 @@ import './product.css';
 
 
 export default class Product extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: ''
-        }
-    }
-
     addToCart(e) {
         e.preventDefault();
         axios.post("/cart/insert", {
-            productId: this.props.itemID
+            productId: this.props.itemID,
+            withCredentials: true
         })
             .then(response => {
                 if (response.data) {
@@ -30,8 +24,6 @@ export default class Product extends React.Component {
             .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     
-    
-
     render() {
         return (
             <div className="product-div">

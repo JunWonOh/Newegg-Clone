@@ -47,8 +47,12 @@ const cartSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema ({
+    firstname: String,
+    lastname: String,
     username: String,
-    password: String
+    password: String,
+    isAdmin: Boolean,
+    cartItems: [cartSchema]
 });
 
 const productSchema = new mongoose.Schema({
@@ -133,8 +137,12 @@ app.post("/", function(req, res, next) {
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.userInfo.password, 10);
         const newUser = new User({
+          firstname: req.body.userInfo.firstname,
+          lastname: req.body.userInfo.lastname,
           username: req.body.userInfo.username,
           password: hashedPassword,
+          isAdmin: false,
+          cartItems: []
         });
         await newUser.save();
         res.send("User Created");
@@ -153,6 +161,16 @@ app.get('/userInfo', function(req, res) {
   }
 })
 
+app.get('/getProduct/:id', function(req, res) {
+  Product.findById(req.params.id, function(err, product) {
+    if (!err) {
+      res.json(product);
+    } else {
+      res.send(err);
+    }
+  });
+})
+
 app.get("/logout", function(req, res) {
   req.logout();
   res.send("Logged out");
@@ -161,9 +179,17 @@ app.get("/logout", function(req, res) {
 app.post("/cart/:task", function(req, res) {
   if (req.isAuthenticated()) {
     if (req.params.task === "insert") {
+      console.log('CART ID: ' + req.body.productId);
       const cartItem = new Cart({
         productId: req.body.productId
       });
+      User.findOneAndUpdate({username: req.user.username}, {$push: {cartItems: cartItem}}, function(err, user) {
+        if (!err) {
+          res.send("item added!");
+        } else {
+          res.send(err);
+        }
+      })
     }
     else if (req.params.task === "remove") {
       //remove cart item code here
