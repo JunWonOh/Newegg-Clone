@@ -1,21 +1,22 @@
 import axios from "axios";
 import React from "react";
-import './product.css'
+import './product.css';
+import './cart.css';
 
 export default class CartItem extends React.Component {
     removeItem() {
-
+        
     }
     render() {
         return (
             <div>
-                <div className="flex-container">
-                    <div><img className="product-img" src={this.props.imgURL} alt="cart-item.png" /></div>
-                    <div>
-                        <ul className="product-ul">
-                            <li>{this.props.name}</li>
-                            <li className="price">{this.props.price}</li>
-                            <li><button className="buy-btn">Remove</button></li>
+                <div className="cart-item">
+                    <div className="flex-container">
+                        <div className="cart-image"><img className="cart-product-img" src={this.props.itemImgURL} alt="cart-item.png" /></div>
+                        <ul>
+                            <li className="cart-header" style={{textAlign: "left"}}>{this.props.itemName}</li>
+                            <li className="cart-price" style={{textAlign: "left"}}>{"$" + this.props.itemPrice}</li>
+                            <li><button className="buy-btn btn-lg ms-auto"style={{marginRight: "20px"}}>Remove</button></li>
                         </ul>
                     </div>
                 </div>

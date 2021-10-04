@@ -161,6 +161,7 @@ app.get('/userInfo', function(req, res) {
   }
 })
 
+// Given a product's id, returns its full object
 app.get('/getProduct/:id', function(req, res) {
   Product.findById(req.params.id, function(err, product) {
     if (!err) {

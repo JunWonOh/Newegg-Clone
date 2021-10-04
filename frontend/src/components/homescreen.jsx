@@ -24,7 +24,7 @@ export default class HomeScreen extends Component {
             var currentName = currentproduct.name;
             if (currentName.length > 100) 
                 currentName = currentName.slice(0,100) + '...';
-            return <Product key={currentproduct._id} itemID={currentproduct._id} itemImgURL={currentproduct.image} itemName={currentName} itemPrice={currentproduct.price}/>;
+            return <Product key={currentproduct._id} itemID={currentproduct._id} itemImgURL={currentproduct.image} itemName={currentName} itemPrice={currentproduct.price.toFixed(2)}/>;
         })
     }
 

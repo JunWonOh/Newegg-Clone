@@ -303,6 +303,7 @@ li {
     margin-left: 20px;
     margin-top: 5px;
     display: flex;
+    max-height: 36px;
 }
 
 .logout-btn:hover {
