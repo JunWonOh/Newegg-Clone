@@ -3,6 +3,8 @@
 A website that imitates newegg.com on a smaller scale. Created from scratch using the MERN stack, and Passport.js for user authentication.
 (A link to the website will be posted here once deployed)
 
+![Screenshot](https://github.com/JunWonOh/Newegg-Clone/blob/main/backend/public/images/screenshot.png)
+
 # Features
 
 ### Browsing
