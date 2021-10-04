@@ -27,7 +27,6 @@ export default class Cart extends React.Component {
 
     RetrieveProducts(id) {
         this.state.productIds.map(item => {
-            console.log(id.productId);
             axios.get('http://localhost:3001/getProduct/' + item.productId).then((res) => 
                 this.setState({
                     products: [...this.state.products, res.data]
@@ -42,9 +41,6 @@ export default class Cart extends React.Component {
             var currentName = item.name;
             if (currentName.length > 100) 
                 currentName = currentName.slice(0,100) + '...';
-            console.log('id: ' + item._id);
-            console.log('name: ' + currentName);
-            console.log('img: ' + item.image);
             return <CartItem key={index} itemID={item._id} itemImgURL={item.image} itemName={currentName} itemPrice={item.price.toFixed(2)} />;
         })
     }

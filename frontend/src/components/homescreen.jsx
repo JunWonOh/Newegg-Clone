@@ -2,17 +2,28 @@ import React, { Component } from "react";
 import SideCategories from "./categories-dropend";
 import axios from 'axios';
 import Product from './product'
+import './cart.css'
 
 export default class HomeScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {products: []};
+        this.state = {products: [], isAdmin: false};
     }
 
     componentDidMount() {
         axios.get('http://localhost:3001/')
             .then(response => {
                 this.setState({products: response.data})
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        axios.get('http://localhost:3001/is-admin', {withCredentials: true})
+            .then(response => {
+                if (response.data === true) {
+                   this.setState({isAdmin: response.data}) 
+                } 
             })
             .catch((error) => {
                 console.log(error);
@@ -26,6 +37,12 @@ export default class HomeScreen extends Component {
                 currentName = currentName.slice(0,100) + '...';
             return <Product key={currentproduct._id} itemID={currentproduct._id} itemImgURL={currentproduct.image} itemName={currentName} itemPrice={currentproduct.price.toFixed(2)}/>;
         })
+    }
+
+    GetAdminButton() {
+        if (this.state.isAdmin) {
+            return <button className="checkout-btn btn btn-lg" onClick={(e) => window.location.href = '/add-products'}>Add More Products</button>;
+        }
     }
 
     render(){
@@ -131,6 +148,7 @@ export default class HomeScreen extends Component {
 
                     <script src="../../frontend/src/test.jsx" type="text/jsx"></script>
                 </section>
+                { this.GetAdminButton() }
             </div>
         );
     }

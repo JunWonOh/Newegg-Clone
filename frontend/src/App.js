@@ -5,6 +5,7 @@ import Home from './components/homescreen';
 import Login from './components/login';
 import Register from './components/register';
 import Cart from './components/cart.jsx';
+import AddProducts from './components/addproducts.jsx'
 import Query from './components/query'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" exact component={() => <Login />} />
           <Route path="/register" exact component={() => <Register />} />
           <Route path="/cart" exact component={() => <Cart />} />
+          <Route path="/add-products" exact component={() => <AddProducts />} />
           <Route path="/p" component={ Query }/>
         </Switch>
       </Router>

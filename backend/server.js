@@ -172,6 +172,14 @@ app.get('/getProduct/:id', function(req, res) {
   });
 })
 
+app.get('/is-admin', function(req, res) {
+  if (req.isAuthenticated) {
+    User.find({username: req.user.username}, function(err, currentUser) {
+      res.send(currentUser[0].isAdmin);
+    })
+  }
+})
+
 app.get("/logout", function(req, res) {
   req.logout();
   res.send("Logged out");
@@ -193,11 +201,44 @@ app.post("/cart/:task", function(req, res) {
     }
     else if (req.params.task === "remove") {
       //remove cart item code here
+      User.findOneAndUpdate({username: req.user.username}, {$pull: {cartItems: {productId: req.body.productId}}}, function(err, user) {
+        if (!err) {
+          res.send("item removed!");
+        } else {
+          res.send(err);
+        }
+      })
     }
   } else {
     res.send("not authorized");
   }
 }) 
+
+app.post("/upload-product", function(req, res) {
+  if (req.isAuthenticated()) {
+    User.find({username: req.user.username}, function(err, currentUser) {
+      if (currentUser[0].isAdmin) {
+        console.log(req.body.name);
+        Product.findOne({ name: req.body.name }, async (err, doc) => {
+          if (err) throw err;
+          if (doc) res.send("Product Already Exists");
+          if (!doc) {
+            const product = new Product({
+              name: req.body.name,
+              price: req.body.price,
+              image: req.body.image,
+              type: req.body.type,
+              brand: req.body.brand,
+              platform: req.body.platform
+            })
+            await product.save();
+            res.send("Product successfully uploaded");
+          }
+        });
+      }
+    });
+  }
+})
 
 app.get('/p/:id', function(req, res) {
   var queryId = req.params.id;

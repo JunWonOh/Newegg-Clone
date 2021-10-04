@@ -4,8 +4,25 @@ import './product.css';
 import './cart.css';
 
 export default class CartItem extends React.Component {
-    removeItem() {
-        
+    removeItem(e) {
+        e.preventDefault();
+        axios.post("/cart/remove", {
+            productId: this.props.itemID,
+            withCredentials: true
+        })
+            .then(response => {
+                if (response.data) {
+                    if (response.data === "not authorized") {
+                        window.location.href = '/cart'
+                    } else {
+                        console.log(response.data)
+                        window.location.href = '/cart'
+                    }
+                } else {
+                    console.log("Login error: incorrect info");
+                }
+            })
+            .catch(err => { if(err.request){ console.log(err.request) } if(err.response){ console.log(err.response) } });
     }
     render() {
         return (
@@ -16,7 +33,7 @@ export default class CartItem extends React.Component {
                         <ul>
                             <li className="cart-header" style={{textAlign: "left"}}>{this.props.itemName}</li>
                             <li className="cart-price" style={{textAlign: "left"}}>{"$" + this.props.itemPrice}</li>
-                            <li><button className="buy-btn btn-lg ms-auto"style={{marginRight: "20px"}}>Remove</button></li>
+                            <li><button className="buy-btn btn ms-auto" onClick={ (e) => this.removeItem(e) } style={{marginRight: "20px"}}>Remove</button></li>
                         </ul>
                     </div>
                 </div>
