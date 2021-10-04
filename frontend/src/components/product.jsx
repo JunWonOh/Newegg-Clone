@@ -31,7 +31,7 @@ export default class Product extends React.Component {
                     <li><img className="product-img" src={this.props.itemImgURL} alt="product"/></li>
                     <li><p>{this.props.itemName}</p></li>
                     <li className="price"><h1>{"$" + this.props.itemPrice}</h1></li>
-                    <button className="buy-btn btn btn-primary btn-sm" onClick={ (e) => this.addToCart(e) }>Add To Cart</button>
+                    <button className="buy-btn btn btn-sm" onClick={ (e) => this.addToCart(e) }>Add To Cart</button>
                 </ul>
             </div>
         );

@@ -180,7 +180,6 @@ app.get("/logout", function(req, res) {
 app.post("/cart/:task", function(req, res) {
   if (req.isAuthenticated()) {
     if (req.params.task === "insert") {
-      console.log('CART ID: ' + req.body.productId);
       const cartItem = new Cart({
         productId: req.body.productId
       });
