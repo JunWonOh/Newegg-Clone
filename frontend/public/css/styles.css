@@ -19,6 +19,14 @@ body {
                                     supported by Chrome, Edge, Opera and Firefox */
 }
 
+.navbar .flex-container {
+    min-width: 800px;
+}
+
+.flex-container .hamburger-menu, .flex-container .nav-flex {
+    margin-top: 20px;
+}
+
 .flex-container {
     flex-direction: row;
     display: flex;
@@ -61,7 +69,7 @@ body {
     background-color: #474747;
     height: 36px;
     margin-right: 3px;
-    max-width: 58px;
+    width: 58px;
 }
 .form-outline {
     width: 90%
@@ -70,7 +78,8 @@ body {
     background-color: #3b3b3b;
     /* Remove white borders */
     border: 0;
-    min-width: 600px;
+    width: 100%;
+
 }
 .search-bar:focus {
     background-color: #3b3b3b;

@@ -40,7 +40,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect("mongodb://localhost:27017/neweggDB", {useNewUrlParser: true});
-// mongoose.set("useCreateIndex", true);
 
 const cartSchema = new mongoose.Schema({
     productId: String
@@ -126,7 +125,6 @@ app.post("/", function(req, res, next) {
         req.logIn(user, (err) => {
           if (err) throw err;
           res.json(user);
-          // console.log(req.user);
         });
       }
     })(req, res, next);
@@ -151,6 +149,7 @@ app.post("/", function(req, res, next) {
   }
 });
 
+// Given a user's username, returns its full object
 app.get('/userInfo', function(req, res) {
   if (req.isAuthenticated()) {
     User.find({username: req.user.username}, function(err, currentUser) {
@@ -172,6 +171,7 @@ app.get('/getProduct/:id', function(req, res) {
   });
 })
 
+// Given a user's username, returns if the user is an admin
 app.get('/is-admin', function(req, res) {
   if (req.isAuthenticated) {
     User.find({username: req.user.username}, function(err, currentUser) {
@@ -180,11 +180,13 @@ app.get('/is-admin', function(req, res) {
   }
 })
 
+// Logs user out
 app.get("/logout", function(req, res) {
   req.logout();
   res.send("Logged out");
 })
 
+// Inserts/removes an item in cart
 app.post("/cart/:task", function(req, res) {
   if (req.isAuthenticated()) {
     if (req.params.task === "insert") {
@@ -200,7 +202,6 @@ app.post("/cart/:task", function(req, res) {
       })
     }
     else if (req.params.task === "remove") {
-      //remove cart item code here
       User.findOneAndUpdate({username: req.user.username}, {$pull: {cartItems: {productId: req.body.productId}}}, function(err, user) {
         if (!err) {
           res.send("item removed!");
@@ -240,6 +241,7 @@ app.post("/upload-product", function(req, res) {
   }
 })
 
+// Performs regex to determine the key to query by, and returns the product's object when found.
 app.get('/p/:id', function(req, res) {
   var queryId = req.params.id;
   if (queryId.trim().toLowerCase().match(/^.*(processor|cpu|i3|i5|i7|ryzen).*$/)) {

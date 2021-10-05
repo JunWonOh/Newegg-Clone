@@ -32,6 +32,7 @@ export default class Cart extends React.Component {
                     products: [...this.state.products, res.data]
                 })
             )
+            return null;
         });
 
     }

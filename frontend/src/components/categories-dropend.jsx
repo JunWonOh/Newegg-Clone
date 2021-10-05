@@ -2,7 +2,7 @@ import React from "react";
 
 function SideCategories() {
     return (
-        <div id="item categories" style={{width: "10.5%"}}>
+        <div id="item categories" style={{width: "10.5%", minWidth: "170px"}}>
             <ul className="category-list">
                 <li>
                     <div className="category btn-group dropend">
