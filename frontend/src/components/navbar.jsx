@@ -40,6 +40,7 @@ export default class Navbar extends React.Component {
     }
 
     formatUsername(username) {
+        console.log(username);
         if (username === undefined) {
             return 'Sign in/Register';
         } else {
@@ -79,9 +80,12 @@ export default class Navbar extends React.Component {
                                 <i className="fas fa-bars fa-2x"></i>
                             </a>
                             <div className="ham-dropdown-menu dropdown-menu noselect" aria-labelledby="navbarDropdownMenuLink">
-                                <a className="dropdown-item" href="/">Action</a>
-                                <a className="dropdown-item" href="/">Another action</a>
-                                <a className="dropdown-item" href="/">Something else here</a>
+                                <a className="dropdown-item" href="/p/cpu">Processors</a>
+                                <a className="dropdown-item" href="/p/gpu">Graphics cards</a>
+                                <a className="dropdown-item" href="/p/ram">Memory</a>
+                                <a className="dropdown-item" href="/p/motherboard">Motherboard</a>
+                                <a className="dropdown-item" href="/p/psu">Power Supplies</a>
+                                <a className="dropdown-item" href="/p/case">Cases</a>
                             </div>
                         </div>
                         <a className="navbar-brand" href="/"><img src="/images/Newegg-clone-logo.png" alt="logo"></img></a>
